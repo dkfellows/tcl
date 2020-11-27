@@ -50,6 +50,7 @@ jobs:
         with:
           repository: create-dmg/create-dmg
           ref: v1.0.8
+          path: create-dmg
       - name: Prepare
         run: |
           echo "::group::Listing configuration"
