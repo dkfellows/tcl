@@ -1,4 +1,4 @@
-name: Build
+name: Build Binaries
 on: [push]
 jobs:
   linux:
@@ -27,7 +27,7 @@ jobs:
         working-directory: unix
       - name: Package
         run: |
-          cat ../unix/tclsh $TCL_ZIP > tclsh${TCL_VER}_unofficial
+          cat ../unix/tclsh $TCL_ZIP > tclsh${TCL_PATCHLEVEL}_unofficial
           chmod +x tclsh${TCL_PATCHLEVEL}_unofficial
           tar -cf tclsh${TCL_PATCHLEVEL}_unofficial.tar tclsh${TCL_PATCHLEVEL}_unofficial
         working-directory: 1dist
@@ -53,9 +53,6 @@ jobs:
           path: create-dmg
       - name: Prepare
         run: |
-          echo "::group::Listing configuration"
-          find . -ls || true
-          echo "::endgroup::"
           mkdir 1dist
           touch generic/tclStubInit.c generic/tclOOStubInit.c || true
           echo "VER_PATH=$(cd tools; pwd)/addVerToFile.tcl" >> $GITHUB_ENV
