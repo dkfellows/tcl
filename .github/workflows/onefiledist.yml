@@ -110,13 +110,17 @@ jobs:
           make binaries libraries tclzipfile
           echo "TCL_ZIP=`pwd`/`echo libtcl*.zip`" >> $GITHUB_ENV
         working-directory: win
-      - name: Get Exact Version
-        run: |
-          make shell SCRIPT="$VER_PATH $GITHUB_ENV"
-        working-directory: win
       - name: Package
         run: |
-          cat ../win/tclsh*.exe $TCL_ZIP > tclsh${TCL_PATCHLEVEL}_unofficial.exe
+          cat ../win/tclsh*.exe $TCL_ZIP > combined.exe
+        working-directory: 1dist
+      - name: Get Exact Version
+        run: |
+          ./combined.exe make shell $VER_PATH $GITHUB_ENV
+        working-directory: 1dist
+      - name: Set Executable Name
+        run: |
+          mv combined.exe tclsh${TCL_PATCHLEVEL}_unofficial.exe
         working-directory: 1dist
       - name: Upload
         uses: actions/upload-artifact@v2
