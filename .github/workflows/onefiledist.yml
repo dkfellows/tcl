@@ -116,7 +116,7 @@ jobs:
         working-directory: 1dist
       - name: Get Exact Version
         run: |
-          ./combined.exe make shell $VER_PATH $GITHUB_ENV
+          ./combined.exe $VER_PATH $GITHUB_ENV
         working-directory: 1dist
       - name: Set Executable Name
         run: |
