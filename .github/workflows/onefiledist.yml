@@ -10,7 +10,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        ref: core-8-branch
       - name: Prepare
         run: |
           touch generic/tclStubInit.c generic/tclOOStubInit.c
